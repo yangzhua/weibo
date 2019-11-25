@@ -34,8 +34,16 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
-	'email_verified_at' => 'datetime',
-    ];
+		'email_verified_at' => 'datetime',
+	];
+
     //指定数据表
     protected $table = 'users';
+
+	public function gravatar($size = '100')
+    {
+        $hash = md5(strtolower(trim($this->attributes['email'])));
+        return "http://www.gravatar.com/avatar/$hash?s=$size";
+    }   
+
 }
